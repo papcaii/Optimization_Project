@@ -28,7 +28,7 @@ Dòng 3: ghi số nguyên dương M
 Dòng 4 ghi y(1) ,y(2), . . ., y(M)  (các số cách nhau bởi dấu cách SPACE)
 ## Example 
 ### Input
-`6 4 2
+`6 4 2\n
 2 4 1 3 1 1
 0 2 4 1 2 5 
 2 0 5 5 3 5 
