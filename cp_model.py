@@ -1,30 +1,18 @@
 from ortools.sat.python import cp_model
 
-inp_handle = open("data.inp", "r")
-inp_string = inp_handle.read()
-inp_handle.close()
-
-inp_string = inp_string.split('\n')
-
 # N, M, K
-num_thesis, num_prof, num_council = map(int, inp_string.pop(0).split())
+num_thesis, num_prof, num_council = map(int, input().split())
+min_thesis, max_thesis, min_prof, max_prof, min_MatchThesis, min_MatchProf = map(int, input().split())
 
-min_thesis, max_thesis, min_prof, max_prof, min_MatchThesis, min_MatchProf = map(int, inp_string.pop(0).split())
+thesis_data = []
+for _ in range(num_thesis):
+    thesis_data.append([int(x) for x in input().strip().split(" ")])
 
-thesis_data = [[] for i in range(num_thesis)]
+prf_data = []
+for _ in range(num_thesis):
+    prf_data.append([int(x) for x in input().strip().split(" ")])
 
-for i in range(num_thesis):
-    data = inp_string.pop(0).strip().split(" ")
-    thesis_data[i] = list(map(int, data))
-
-prf_data = [[0 for __ in range(num_prof)] for _ in range(num_thesis)]
-
-for i in range(num_thesis):
-    data = inp_string.pop(0).strip().split(" ")
-    prf_data[i] = list(map(int, data))
-
-data = inp_string.pop(0).strip().split(" ")
-thesis_advisor = list(map(int, data))
+thesis_advisor = [int(x) for x in input().strip().split(" ")]
 
 
 def solve(get_max=0):
@@ -52,13 +40,12 @@ def solve(get_max=0):
     for i in range(num_prof):
         model.AddExactlyOne(cp[council][i] for council in range(num_council))
 
-    # Number of thesis in a council >= min_thesis and <= max_thesis
     for council in range(num_council):
+        # Number of thesis in a council >= min_thesis and <= max_thesis
         model.Add(sum(ct[council][k] for k in range(num_thesis)) >= min_thesis)
         model.Add(sum(ct[council][k] for k in range(num_thesis)) <= max_thesis)
 
-    # Number of professor in a council >= min_prof and <= max_prof:
-    for council in range(num_council):
+        # Number of professor in a council >= min_prof and <= max_prof:
         model.Add(sum(ct[council][i] for i in range(num_prof)) >= min_prof)
         model.Add(sum(ct[council][i] for i in range(num_prof)) <= max_prof)
 
