@@ -1,5 +1,6 @@
 import random
 
+
 def generate_test_case(file_path, N, M, K):
     with open(file_path, 'w') as inp_file:
         # Constraints

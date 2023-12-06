@@ -1,5 +1,3 @@
-# This use cp_model of ortools
-
 from ortools.sat.python import cp_model
 
 inp_handle = open("data.inp", "r")
@@ -29,7 +27,7 @@ data = inp_string.pop(0).strip().split(" ")
 thesis_advisor = list(map(int, data))
 
 
-def solve():
+def solve(get_max=0):
     model = cp_model.CpModel()
 
     # Assign thesis to council
@@ -79,34 +77,38 @@ def solve():
                 if prf_data[k][i] < min_MatchProf or (i + 1) == thesis_advisor[k]:
                     model.AddAtMostOne(ct[council][k], cp[council][i])
 
-    objective_terms = []
+    # IF we want to get the maximum similarity, BUT this will significantly increase time
+    if get_max == 1:
+        objective_terms = []
 
-    # Thesis-Thesis similarity
-    for council in range(num_council):
-        for i in range(num_thesis):
-            for j in range(i + 1, num_thesis):
-                tt = model.NewBoolVar(f'tt[{i}, {j}]')
-                model.AddBoolAnd([ct[council][i], ct[council][j]]).OnlyEnforceIf(tt)
-                similarity = thesis_data[i][j] * tt
-                objective_terms.append(similarity)
+        # Thesis-Thesis similarity
+        for council in range(num_council):
+            for i in range(num_thesis):
+                for j in range(i + 1, num_thesis):
+                    tt = model.NewBoolVar(f'tt[{i}, {j}]')
+                    model.AddBoolAnd([ct[council][i], ct[council][j]]).OnlyEnforceIf(tt)
+                    similarity = thesis_data[i][j] * tt
+                    objective_terms.append(similarity)
 
-    # Thesis-Professor similarity
-    for council in range(num_council):
-        for k in range(num_thesis):
-            for i in range(num_prof):
-                tp = model.NewBoolVar(f'tp[{k}, {i}]')
-                model.AddBoolAnd([ct[council][k], cp[council][i]]).OnlyEnforceIf(tp)
-                similarity = prf_data[k][i] * tp
-                objective_terms.append(similarity)
+        # Thesis-Professor similarity
+        for council in range(num_council):
+            for k in range(num_thesis):
+                for i in range(num_prof):
+                    tp = model.NewBoolVar(f'tp[{k}, {i}]')
+                    model.AddBoolAnd([ct[council][k], cp[council][i]]).OnlyEnforceIf(tp)
+                    similarity = prf_data[k][i] * tp
+                    objective_terms.append(similarity)
 
-    model.Maximize(sum(objective_terms))
+        model.Maximize(sum(objective_terms))
 
     # Solve
     solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = 10
+    solver.parameters.enumerate_all_solutions = False
     status = solver.Solve(model)
 
     # Print solution
-    if status == cp_model.OPTIMAL:
+    if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
         print(num_thesis)
         for k in range(num_thesis):
             for council in range(num_council):
