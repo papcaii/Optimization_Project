@@ -1,9 +1,13 @@
 # Optimization_Project
 
-maybe we can do this...
+Maybe we can do this...
 
 ## Description  
 Read detail about this task in `DESCRIPTION.md`
 
-## How to use  
+## How to use
 ### Create test case
+If you don't have test case yet, run `generate_test_case.py` to create `data.inp`
+
+### Running
+Run `cp_model.py`
