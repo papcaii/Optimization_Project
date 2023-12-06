@@ -10,4 +10,6 @@ Read detail about this task in `DESCRIPTION.md`
 If you don't have test case yet, run `generate_test_case.py` to create `data.inp`
 
 ### Running
-Run `cp_model.py` (If N > 20, this slow as snail! )
+Run `cp_model.py` 
++ solve() function give 2 options, 0 (default) won't try to maximize object
++ Option 1 will try to maximize object (BUT this will slow as snail! )
