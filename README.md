@@ -10,4 +10,4 @@ Read detail about this task in `DESCRIPTION.md`
 If you don't have test case yet, run `generate_test_case.py` to create `data.inp`
 
 ### Running
-Run `cp_model.py`
+Run `cp_model.py` (If N > 20, this slow as snail! )
