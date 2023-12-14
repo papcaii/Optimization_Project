@@ -7,9 +7,9 @@ Read detail about this task in `DESCRIPTION.md`
 
 ## How to use
 ### Create test case
-If you don't have test case yet, run `generate_test_case.py` to create `data.inp`
++ If you don't have test case yet, run `generate_test_case.py` to create `data.inp`
++ Or you can get data from `data` folder
 
-### Running
-Run in CMD: `python cp_model.py < data.inp` 
-+ solve() function give 2 options, 0 (default) just find FEASIBLE solution
-+ Option 1 will try to find OPTIMAL soulution (BUT this will slow as snail! )
+### Solutions
++ Cp_model: `python cp_model.py < data.inp` 
++ Cp_model with `Local search`+`Greedy`: `python LocalGreedy.py < data.inp` 
