@@ -1,6 +1,6 @@
 # ================================   IDEA    ================================== #
 # Total compatibility = Thesis-Thesis compatibility + Thesis_Professor
-# So I will assign thesis first with cp_model
+# So I will assign thesis first with cp_model ---> Loop all feasible assignments
 # Then handle each feasible thesis assignment with SolutionHandle class
 # Then I will search for best professor assignment with LocalGreedy class
 # ============================================================================= #
