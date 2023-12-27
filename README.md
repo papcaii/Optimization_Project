@@ -11,5 +11,9 @@ Read detail about this task in `DESCRIPTION.md`
 + Or you can get data from `data` folder
 
 ### Solutions
-+ Cp_model: `python cp_model.py < data.inp` 
-+ Cp_model with `Local search`+`Greedy`: `python LocalGreedy.py < data.inp` 
++ Cp_model: `CP_Model.py`
++ Cp_model with Greedy: `CPGreedy.py`
++ Full Greedy: `FullGreedy.py`
+
+### Running with data
+In Terminal: `python <solution_name>.py < data.inp`
