@@ -96,7 +96,6 @@ def solve(get_max=0):
     # Solve
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = 10
-    solver.parameters.enumerate_all_solutions = False
     status = solver.Solve(model)
 
     # Print solution
@@ -119,4 +118,4 @@ def solve(get_max=0):
         print("No solution found.")
 
 
-solve()
+solve(get_max=1)
