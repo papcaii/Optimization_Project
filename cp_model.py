@@ -1,3 +1,8 @@
+# ================================   IDEA    ================================== #
+# Just a CP Model from Ortools
+# Loop all solutions then choose the optimal
+# ============================================================================= #
+
 from ortools.sat.python import cp_model
 
 # N, M, K
