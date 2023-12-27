@@ -1,6 +1,6 @@
 # ================================   IDEA    ================================== #
 # Total compatibility = Thesis-Thesis compatibility + Thesis_Professor
-# So I will assign thesis first with cp_model ---> Loop all feasible assignments
+# So I will assign thesis first with cp_model
 # Then handle each feasible thesis assignment with SolutionHandle class
 # Then I will search for best professor assignment with LocalGreedy class
 # ============================================================================= #
@@ -39,8 +39,8 @@ def calc_tt_compatibility(thesis_array):
     return compatibility
 
 
-class LocalGreedy:
-    """Local search + Greedy method for professor assignment"""
+class ProfessorGreedy:
+    """Greedy method for professor assignment"""
 
     def __init__(self, thesis_array):
         self.thesis_array = thesis_array
@@ -166,7 +166,7 @@ class SolutionHandle(cp_model.CpSolverSolutionCallback):
                     break
 
         # Local search for each thesis assignments
-        my_greedy = LocalGreedy(thesis_array)
+        my_greedy = ProfessorGreedy(thesis_array)
         answer = my_greedy.solver()
 
         # If LocalGreedy give out solution
@@ -202,7 +202,7 @@ def solve(log=False):
     # Generate all feasible thesis assignments, then handle it with SolutionHandle
     solver = cp_model.CpSolver()
     # Set time limit for the solver
-    solver.parameters.max_time_in_seconds = 10.0
+    solver.parameters.max_time_in_seconds = 60.0
     solution_handle = SolutionHandle(ct)
     # solution_handle will be called for every solution
     solver.SearchForAllSolutions(model, solution_handle)
@@ -223,4 +223,4 @@ def solve(log=False):
         print(f'Total solutions: {solution_handle.solution_count}')
 
 
-solve(log=True)
+solve(log=False)
