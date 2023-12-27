@@ -1,3 +1,9 @@
+# ================================   IDEA    ================================== #
+# Total compatibility = Thesis-Thesis compatibility + Thesis_Professor
+# So I will assign thesis first with greedy method (ThesisGreedy class) ---> Choose high compatibility assignments
+# Then handle each thesis assignment with ProfessorGreedy class 
+# ============================================================================= #
+
 # PYTHON
 import time
 import numpy as np
